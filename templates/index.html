@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Attendance System</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-user-check"></i>
+                <h2>FaceAttend</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#" class="menu-item active" data-target="dashboard-section"><i
+                        class="fa-solid fa-chart-pie"></i> Dashboard</a>
+                <a href="#" class="menu-item" data-target="students-section"><i class="fa-solid fa-users"></i> Student
+                    Management</a>
+                <a href="#" class="menu-item" data-target="attendance-section"><i class="fa-solid fa-camera"></i> Live
+                    Attendance</a>
+                <a href="#" class="menu-item" data-target="leaves-section"><i class="fa-solid fa-calendar-minus"></i>
+                    Leave Management</a>
+                <a href="#" class="menu-item" data-target="reports-section"><i
+                        class="fa-solid fa-file-invoice-list"></i> Reports & Analytics</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-navbar">
+                <h1 id="section-title">Dashboard</h1>
+                <div class="user-profile">
+                    <span class="date-time" id="live-clock">Loading clock...</span>
+                    <div class="avatar">Admin</div>
+                </div>
+            </header>
+
+            <div class="content-body">
+
+                <section id="dashboard-section" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fa-solid fa-users icon-blue"></i>
+                            <div>
+                                <h3>Total Students</h3>
+                                <p id="dash-total-students">120</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fa-solid fa-user-check icon-green"></i>
+                            <div>
+                                <h3>Present Today</h3>
+                                <p id="dash-present">98</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fa-solid fa-user-xmark icon-red"></i>
+                            <div>
+                                <h3>Absent Today</h3>
+                                <p id="dash-absent">18</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fa-solid fa-clock icon-orange"></i>
+                            <div>
+                                <h3>Late Arrivals</h3>
+                                <p id="dash-late">4</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-split">
+                        <div class="card real-time-log">
+                            <h3><i class="fa-solid fa-bolt text-pulse"></i> Real-Time Attendance Feed</h3>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Student</th>
+                                            <th>ID</th>
+                                            <th>Time</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="realtime-log-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="students-section" class="content-section">
+    <div class="management-grid">
+        <div class="card">
+            <h3><i class="fa-solid fa-user-plus"></i> Student Registration</h3>
+            <form id="student-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="stud-name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Student ID / Roll No</label>
+                    <input type="text" id="stud-id" required placeholder="STU1023">
+                </div>
+                
+                <div class="form-group">
+                    <label>Current Year</label>
+                    <select id="stud-year" required>
+                        <option value="" disabled selected>Select Year</option>
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Semester</label>
+                    <select id="stud-semester" required>
+                        <option value="" disabled selected>Select Semester</option>
+                        <option value="Semester 1">Semester 1</option>
+                        <option value="Semester 2">Semester 2</option>
+                        <option value="Semester 3">Semester 3</option>
+                        <option value="Semester 4">Semester 4</option>
+                        <option value="Semester 5">Semester 5</option>
+                        <option value="Semester 6">Semester 6</option>
+                        <option value="Semester 7">Semester 7</option>
+                        <option value="Semester 8">Semester 8</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Course/Department</label>
+                    <select id="stud-course" required>
+                        <option value="" disabled selected>Select Course</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Electronics & Communication">Electronics & Communication</option>
+                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Year of Passing</label>
+                    <select id="stud-passing-year" required>
+                        <option value="" disabled selected>Select Passing Year</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Register Face Baseline</label>
+                    <div class="face-capture-box" id="register-cam-box" style="position: relative; overflow: hidden; height: 200px; display: flex; justify-content: center; align-items: center; background: #000; border-radius: 6px;">
+                        <canvas id="register-preview-canvas" style="width: 100%; height: 100%; object-fit: cover; display: none;"></canvas>
+                        <div id="register-placeholder-text" style="color: #64748b; text-align: center;">
+                            <i class="fa-solid fa-face-smile fa-2x"></i>
+                            <p>Live camera must be running</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary" id="btn-capture-face" style="margin-top: 10px;">
+                        <i class="fa-solid fa-camera"></i> Capture Face Base
+                    </button>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Register Student</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3><i class="fa-solid fa-address-book"></i> Student Profiles</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Class details</th>
+                            <th>Face Data</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+                <section id="attendance-section" class="content-section">
+                    <div class="attendance-container">
+                        <div class="card camera-card">
+                            <h3><i class="fa-solid fa-video"></i> Live Face Recognition Cam</h3>
+                            <div class="camera-viewport">
+                                <div class="scanner-line"></div>
+                                <video id="video-feed" autoplay muted playsinline style="display:none;"></video>
+                                <div id="camera-placeholder" class="camera-placeholder">
+                                    <i class="fa-solid fa-camera fa-3x"></i>
+                                    <p>Camera Off</p>
+                                </div>
+                                <div class="scan-overlay-info" id="scan-result-overlay">
+                                    Scanning...
+                                </div>
+                            </div>
+                            <div class="camera-controls">
+                                <button class="btn btn-success" id="btn-start-cam"><i class="fa-solid fa-power-off"></i>
+                                    Start Camera</button>
+                                <button class="btn btn-danger" id="btn-stop-cam" disabled><i
+                                        class="fa-solid fa-ban"></i> Stop Camera</button>
+                            </div>
+                        </div>
+
+                        <div class="card verification-card">
+                            <h3>Last Scan Result</h3>
+                            <div class="scan-result-display" id="scan-result-display">
+                                <div class="result-placeholder">
+                                    <i class="fa-solid fa-face-viewfinder"></i>
+                                    <p>Await scanning recognition...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="leaves-section" class="content-section">
+                    <div class="management-grid">
+                        <div class="card">
+                            <h3><i class="fa-solid fa-envelope-open-text"></i> Apply/Log Student Leave</h3>
+                            <form id="leave-form">
+                                <div class="form-group">
+                                    <label>Student ID</label>
+                                    <input type="text" id="leave-stud-id" placeholder="e.g., STU1001" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Leave Date</label>
+                                    <input type="date" id="leave-date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Reason</label>
+                                    <textarea id="leave-reason" rows="3"
+                                        placeholder="Medical / Personal leave reasons..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-warning">Approve & Update Attendance
+                                    Automatically</button>
+                            </form>
+                        </div>
+
+                        <div class="card">
+                            <h3>Approved Leave Adjustments</h3>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Date</th>
+                                            <th>Reason</th>
+                                            <th>Status Overwrite</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="leave-table-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="reports-section" class="content-section">
+                    <div class="card report-controls">
+                        <h3><i class="fa-solid fa-filter"></i> Generate Reports</h3>
+                        <div class="filter-row">
+                            <div class="form-group">
+                                <label>Report Type</label>
+                                <select id="report-type">
+                                    <option value="daily">Daily Attendance Report</option>
+                                    <option value="monthly">Monthly Summary Report</option>
+                                    <option value="absentee">Defaulter / Absentee Report</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary" id="btn-generate-report"
+                                style="margin-top: auto; height: 42px;">
+                                <i class="fa-solid fa-gears"></i> Compile Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card report-result-card">
+                        <div class="report-header-output">
+                            <h3 id="report-title-display">Report Preview</h3>
+                            <button class="btn btn-secondary btn-sm" onclick="window.print()"><i
+                                    class="fa-solid fa-print"></i> Export / Print</button>
+                        </div>
+                        <div class="table-container">
+                            <table id="report-table">
+                                <thead id="report-table-head">
+                                </thead>
+                                <tbody id="report-table-body">
+                                    <tr>
+                                        <td colspan="5" style="text-align: center; color: var(--text-muted);">Select
+                                            variables above to compile report analytics data.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="../static/script.js"></script>
+</body>
+
+</html>
